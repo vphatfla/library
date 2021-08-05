@@ -51,7 +51,9 @@ function displayBook(){
         container.textContent = 'Your library is empty';
     } 
     else 
+        myLibrary.sort();
         for (i in myLibrary){
+            console.log('display inside loop');
             content = `${myLibrary[i].title} by ${myLibrary[i].author}, ${myLibrary[i].pages} pages`;
             if (myLibrary[i].read == true) (content += ' Already Read')
             else (content += ' Not read yet');
@@ -67,7 +69,7 @@ function displayBook(){
             container.appendChild(divBook);
         }
     localStorage.setItem("myLibrary", JSON.stringify(myLibrary)); // save library 
-
+    console.log('execute displayBook');    
     // call delete function
     deleteButtons = container.querySelectorAll('button');
     deleteButtons.forEach(deleteButton => {deleteButton.addEventListener('click', deleteBook)});
@@ -83,13 +85,21 @@ function deleteBook(){
 
 // call function for add button
 addButton.addEventListener('click', function(){
-    addBookToLibrary(titleField.value, authorField.value, pagesField.value, readField.checked);
+    if (titleField.value != '' && authorField.value != ''){
+        if (pagesField.value != ''){
+            addBookToLibrary(titleField.value, authorField.value, pagesField.value, readField.checked);
+        }
+        else alert('Please input number of pages');
+    }
+    else alert('Please input Title/Author');
     displayBook();
 });
 
 
 // search book button 
-searchButton.addEventListener('click',function(){
+searchButton.addEventListener('click',searchButtonFunction);
+// search function 
+function searchButtonFunction(){
     let title = titleField.value.toUpperCase();
     let author = authorField.value.toUpperCase();
     let pages = parseInt(pagesField.value);
@@ -97,11 +107,55 @@ searchButton.addEventListener('click',function(){
     let searchLibrary = [];
     for (i in myLibrary){
         let check = true;
-        if (myLibrary[i].title.toUpperCase() != title && title != '') {check = false; console.log(check);}
-        else if (myLibrary[i].author.toUpperCase() != author && author != '') {check =false;console.log(check);}
-        else if (myLibrary[i].pages != pages && !isNaN(pages)) {check = false; console.log(check);}
-        else if (myLibrary[i].read != readCheck && readCheck != false){ check = false; console.log(check);}
+        if (myLibrary[i].title.toUpperCase() != title && title != '') {check = false; }
+        else if (myLibrary[i].author.toUpperCase() != author && author != '') {check =false;}
+        else if (myLibrary[i].pages != pages && !isNaN(pages)) {check = false; }
+        else if (myLibrary[i].read != readCheck && readCheck != false){ check = false; }
         if (check) searchLibrary.push(myLibrary[i]);
     }
-    console.log(searchLibrary);
-});
+    displaySearch(searchLibrary);
+}
+// display library when search with filters (title, author, ...)
+
+function displaySearch(library){
+    container.innerHTML = '';
+    let content  = '';
+    if (library.length == 0) {
+        container.textContent = 'There is no book that\'s matched your search';
+    }
+    else {
+        for (i in library){
+            content = `${library[i].title} by ${library[i].author}, ${library[i].pages} pages`;
+            if (library[i].read == true) (content += ' Already Read')
+            else (content += ' Not read yet');
+            
+            let divBook = document.createElement('div');
+
+            let button = document.createElement('button');
+            button.innerHTML = 'Delete';
+            button.setAttribute('id', library[i].title);
+
+            divBook.textContent = content;
+            divBook.appendChild(button);
+            container.appendChild(divBook);
+        }
+    }
+    // deletebutton is nodelist of deletebutton in searchlist
+    deleteButtons = container.querySelectorAll('button');
+    deleteButtons.forEach(deleteButton => {deleteButton.addEventListener('click', deleteBookSearch)});
+    // reset button must be declared after deleteButton, because deletebutton get all the 'button' inside container. 
+    let buttonResetAfterSearch = document.createElement('button');
+    buttonResetAfterSearch.innerHTML = 'Reset Library';
+    container.appendChild(buttonResetAfterSearch);
+    buttonResetAfterSearch.addEventListener('click', displayBook);
+}
+
+// delete function for search library only, different: replace the display() for the whole library by call the searchButtonFunction() -> displaySearch(); deleting based on id = title of the book
+function deleteBookSearch(){
+    let id  = this.id;
+    for (i in myLibrary){
+        if (myLibrary[i].title == id) { removeItem(i); break; };
+    }
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary)); // save library
+    searchButtonFunction();
+}

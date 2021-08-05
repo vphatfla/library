@@ -1,0 +1,89 @@
+h1{
+  font-size: 50px;
+  margin-top: 3%;
+}
+html{
+  text-align: center;
+  font-family: 'Georama', sans-serif;
+  background-image: url("images/background-image.jpg");
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+input {
+  margin-left: 1%;
+  font-size: 15px;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color:rgba(255, 255, 255, 0.344);
+}
+input:hover{
+  background-color: rgb(232, 232, 232);
+  
+}
+.inputDiv button{
+  background-color:rgba(182, 182, 182, 0.289); /* Green */
+  border: 1px solid black;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px 0px 5px 0px;
+}
+
+.inputDiv button:hover{
+  background-color: aquamarine;
+  
+}
+.container{
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+.container div{
+  color: black;
+  font-size: 18px;
+  font-family: 'Patrick Hand', cursive;
+}
+.container div button{
+  float: right;
+  margin-right: 100px;
+  width: 70px;
+  background-color: white; /* Green */
+  border: 1px solid black;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  border-radius: 6px 0px 6px 0px;
+}
+.container div button:hover{
+  background-color: lightslategrey;
+  color: white;
+}
+.container div{
+  padding: 10px 0px 10px 0px;
+  margin-top: 0.5%;
+  border: 1px solid gray;
+  width: 800px;
+  height: auto;
+  background-color: rgba(154, 174, 209, 0.159);
+}
+.container div:hover{
+  background-color: white;
+}

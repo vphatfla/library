@@ -2,17 +2,24 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Georama:wght@200&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     </head>
     <body>
         <h1>Library</h1>
         <div class='inputDiv'>
-            <input type='text' id='title' name='title' placeholder="Title">
-            <input type='text' id='author' name='author' placeholder="Author">
-            <input type='text' id='pages' name='pages' placeholder="Number of pages">
-            <label for='readStatus'>Read status?</label>
-            <input type='checkbox' id='readStatus' name='readStatus'>
-            <button class='addBook'>Add book</button>
-            <button class='searchBook'>Search book</button>
+                <input type='text' id='title' name='title' placeholder="Title" required>
+                <input type='text' id='author' name='author' placeholder="Author" required>
+                <input type='number' id='pages' name='pages' placeholder="Number of pages" required>
+                <label for='readStatus'>Read status?</label>
+                <input type='checkbox' id='readStatus' name='readStatus'>
+                <button class='addBook'>Add book</button>
+                <button class='searchBook'>Search book</button>
+            
         </div>
 
         <div class='container'>
